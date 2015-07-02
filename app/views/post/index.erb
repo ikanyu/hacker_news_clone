@@ -1,0 +1,27 @@
+<% if !@error.nil? %>
+<b><%= @error %></b>
+<% end %>
+<div class="container">
+	<div class="menu">
+		<a href="/posts">|  Home  |</a>
+		<% if !session[:id].nil? %>
+				<a href="/posts/new">  Create Post  |</a>
+				<a href="/users/logout">Log Out</a>
+		<% else %>		
+			<a href="/users/login">  Login  |</a>
+			<a href="/users/new">  Register  |</a>	
+		<% end %>		
+	</div>
+	<div>
+		<h2>Posts</h2>
+		<% if !@posts.nil? %>
+			<% @posts.each do |post| %>
+				<% if post.content.empty? %>
+					<a href="<%= post.url %>"><%= post.title %></a><br/>
+				<% else %>
+					<a href="/posts/<%= post.id %>"><%= post.title %></a><br/>
+				<% end %>		
+			<% end %>
+		<% end %>	
+	</div>
+</div>
