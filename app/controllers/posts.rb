@@ -31,5 +31,6 @@ end
 get '/posts/:id' do
 	@post = Post.find(params[:id])
 	@comments = @post.comments
+	@count = @comments.count
 	erb :"post/show"
 end

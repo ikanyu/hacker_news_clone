@@ -23,7 +23,13 @@
 	<% if !@comments.nil? %>
 		<% @comments.each do |comment| %>
 			<%= comment.comment %><br>
-			by <b><%= comment.user.username %></b><br><br>
+			by <b><%= comment.user.username %></b>
+    	<% if CommentVote.find_by(comment_id: comment.id, user_id: session[:id]).nil? %>
+	    	<div class="comments" data-comment-id="<%= comment.id %>">
+					<button value="submit" id="buttons<%= comment.id %>">Vote</button>
+				</div>
+			<% end %><%= comment.comment_votes.count %> votes(s)	
+			<br><br>
 		<% end %>	
 	<% end %>
 </div>

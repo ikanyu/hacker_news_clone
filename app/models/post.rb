@@ -1,6 +1,7 @@
 class Post < ActiveRecord::Base
   # Remember to create a migration!
   has_many :comments
+  has_many :post_votes
   belongs_to :user
 
   validates :title, presence: true

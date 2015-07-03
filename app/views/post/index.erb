@@ -18,9 +18,24 @@
 			<% @posts.each do |post| %>
 				<% if post.content.empty? %>
 					<a href="<%= post.url %>"><%= post.title %></a><br/>
+					by <b><%= post.user.username %></b><br><br>
+    				<!-- <input type="hidden" name="post_id" value= <%= post.id%> > -->
+    				<% if PostVote.find_by(post_id: post.id, user_id: session[:id]).nil? %>
+	    				<div class="posts" data-post-id="<%= post.id %>">
+	    					<button value="submit" id="button<%= post.id %>">Vote</button>
+	    				</div><br> 
+	    			<% end %>	
 				<% else %>
 					<a href="/posts/<%= post.id %>"><%= post.title %></a><br/>
+					by <b><%= post.user.username %></b><br><br>
+    				<!-- <input type="hidden" name="post_id" value= <%= post.id%> > -->
+    				<% if PostVote.find_by(post_id: post.id, user_id: session[:id]).nil? %>
+	    				<div class="posts" data-post-id="<%= post.id %>">
+	    					<button value="submit" id="button<%= post.id %>">Vote</button>
+	    				</div><br><br>
+    				<% end %>	
 				<% end %>		
+			<% if post.post_votes.count == 0 %>0 vote(s)<% else %><%= post.post_votes.count %>vote(s)<% end %> <br><br>
 			<% end %>
 		<% end %>	
 	</div>
